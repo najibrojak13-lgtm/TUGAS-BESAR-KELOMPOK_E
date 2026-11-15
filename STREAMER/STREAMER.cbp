@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="STREAMER" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SIAKAD" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SIAKAD" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="BST/header/nilaiBST.h" />
+		<Unit filename="Bonus/header/bonus.h" />
+		<Unit filename="Bonus/implementation/bonus.cpp" />
+		<Unit filename="Khusus/header/khusus.h" />
+		<Unit filename="Khusus/implementation/khusus.cpp" />
+		<Unit filename="MLL-02/header/aktivitas.h" />
+		<Unit filename="MLL-02/header/game.h" />
+		<Unit filename="MLL-02/header/streamer.h" />
+		<Unit filename="MLL-02/implementation/aktivitas/aktivitas_103012500358.cpp" />
+		<Unit filename="MLL-02/implementation/aktivitas/aktivitas_103012530069.cpp" />
+		<Unit filename="MLL-02/implementation/game/game_103012500358.cpp" />
+		<Unit filename="MLL-02/implementation/game/game_103012530069.cpp" />
+		<Unit filename="MLL-02/implementation/streamer/streamer_103012500358.cpp" />
+		<Unit filename="MLL-02/implementation/streamer/streamer_103012530069.cpp" />
+		<Unit filename="dummy.cpp" />
+		<Unit filename="dummy.h" />
+		<Unit filename="interface.cpp" />
+		<Unit filename="interface.h" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
