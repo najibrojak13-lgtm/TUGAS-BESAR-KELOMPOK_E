@@ -1,93 +1,41 @@
-#ifndef GAME_H_INCLUDED
-#define GAME_H_INCLUDED
-#include <string>
-#include <iostream>
+#ifndef GAME_H
+#define GAME_H
 
+#include <iostream>
+#include <string>
 using namespace std;
 
-struct ------------
-{
-    ------------
+struct Game {
+    string idGame;
+    string judulGame;
+    string genre;
+    float rating;
 };
 
-typedef ------------ ------------;         // variabel alias untuk infor
-typedef  struct ------------ *------------;   // variabel alias untuk pointer
+typedef Game infotypeGame;
+typedef struct ElmGame* adrGame;
 
-// kerangka dari elemen list
-struct ------------
-{
-    ------------
+struct ElmGame {
+    infotypeGame info;
+    adrGame next;
+    adrGame prev;
 };
 
-// kerangka dari list
-struct ------------
-{
-    ------------ ------------;
+struct ListGame {
+    adrGame first;
+    adrGame last;
 };
 
-// pengecekan apakah list kosong
-------------;
-/* I.S. list LMK terdefinisi
-   F.S. true jika list kosong dan false jika tidak kosong */
+void createListGame(ListGame &L);
+bool isEmptyGame(ListGame L);
+adrGame alokasiGame(infotypeGame x);
+void dealokasiGame(adrGame &p);
 
-// pembuatan list kosong
-------------;
-/* I.S. ~
-   F.S. terbentuk list kosong */
+void insertFirstGame(ListGame &L, adrGame p);
+void insertLastGame(ListGame &L, adrGame p);
+void deleteGameByID(ListGame &L, string idGame, adrGame &p);
 
-// manajemen memori
-------------;
-/* I.S. info mata kuliah x terdefinisi
-   F.S. mengembalikan alamat elemen berisi x dengan next NULL */
+adrGame findGame(ListGame L, string idGame);
+void printAllGame(ListGame L);
 
-------------;
-/* I.S. pointer P terdefinisi
-   F.S. memori yang digunakan P dikembalikan ke sistem */
-
-// pencarian sebuah elemen list
-------------;
-/* I.S. list LMK dan kode mata kuliah terdefinisi
-   F.S. mengembalikan alamat elemen mata kuliah yang cocok atau NULL jika tidak ditemukan
-*/
-
-// penambahan elemen *
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong dan elemen list P
-   F.S. menempatkan elemen beralamat P pada awal list */
-
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong, elemen list P dan elemn list prec
-   F.S. menempatkan elemen beralamat P sesudah elemen beralamat Prec */
-
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong dan elemen list P
-   F.S. menempatkan elemen beralamat P pada akhir list */
-
-// penghapusan sebuah elemen
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong dan elemen list P
-   F.S. P adalah alamat dari alamat elemen pertama list
-        yang akan dihapus dan elemen list selanjutnya akan menjadi
-        elemenlist pertama atau tidak ada elemen list pertama*/
-
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong dan elemen list P
-   F.S. P adalah alamat dari alamat elemen terakhir list
-        yang akan dihapus dan elemen list sebelumnya akan menjadi
-        elemenlist terakhir atau tidak ada elemen list terakhir */
-
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong, elemen list P dan elemn list prec
-   F.S. P adalah alamat dari alamat elemen list setelah prec
-        yang akan dihapus dan elemen list setelah p akan terhubung
-        langsung dengan prec atau tidak ada elemen list setelahnya */
-
-------------;
-/* I.S. terdefinisi list LMK yang mungkin kosong
-   F.S. jika list tidak kosong menampilkan semua info yang ada pada list */
-
-------------;
-/* I.S. ~
-   F.S. meminta data mahasisswa dari user */
-
-#endif // MATAKULIAH_H_INCLUDED
+#endif
