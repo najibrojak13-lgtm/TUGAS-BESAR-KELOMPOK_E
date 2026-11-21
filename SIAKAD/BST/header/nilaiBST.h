@@ -1,117 +1,111 @@
-#ifndef NILAIBST_H_INCLUDED
-#define NILAIBST_H_INCLUDED
+#ifndef SESISTREAMINGBST_H_INCLUDED
+#define SESISTREAMINGBST_H_INCLUDED
 #include <string>
 #include <iostream>
 
 using namespace std;
 
-struct NilaiAkademik
+struct SesiStreaming
 {
-    ------------
+    string idSesi;
+    string idStreamer;
+    string idGame;
+    string tanggalStreaming;
+    int durasi;            // dalam menit atau detik sesuai kebutuhan
+    int jumlahPenonton;
+    int jumlahPenayangan;
+    double pendapatan;
 };
 
-typedef ------------ ------------; // variabel alias untuk infor
-typedef  struct ------------ *------------;   // variabel alias untuk pointer
+typedef SesiStreaming infotypeSesi;         // variabel alias untuk info
+typedef struct nodeSesi *adrNodeSesi;       // variabel alias untuk pointer
 
 // kerangka dari elemen node
-struct nodeNilai
+struct nodeSesi
 {
-    ------------
+    infotypeSesi info;
+    adrNodeSesi left;
+    adrNodeSesi right;
 };
 
 // kerangka dari BST
-struct BST
+struct BSTSesi
 {
-    ------------
+    adrNodeSesi root;
 };
 
-------------;
-/* I.S. grade terdefinisi
-   F.S. mengembalikan urutan grade T < E < D < C < BC < B < AB < A,
-        atau -1 jika grade tidak dikenal */
-
-------------;
-/* I.S. record left dan right terdefinisi dengan grade yang dikenal
-   F.S. true jika record left berada sebelum record right sesuai urutan BST */
-
-------------;
-/* I.S. komponen tugas, kuis, UTS, dan UAS terdefinisi
-   F.S. nilai akhir dibulatkan dari 15% tugas + 15% kuis + 35% UTS + 35% UAS;
-        grade T digunakan jika hasil berbobot di luar 0 sampai 100 */
-
 // pengecekan apakah BST kosong
-------------;
+bool isEmptySesi(BSTSesi T);
 /* I.S. BST T terdefinisi
    F.S. true jika BST kosong dan false jika tidak kosong */
 
 // pembuatan BST kosong
-------------;
+void createBSTSesi(BSTSesi &T);
 /* I.S. ~
    F.S. terbentuk BST kosong */
 
 // manajemen memori
-------------;
-/* I.S. info x terdefinisi
+adrNodeSesi alokasiSesi(infotypeSesi x);
+/* I.S. info sesi x terdefinisi
    F.S. mengembalikan alamat node berisi x dengan anak kiri dan kanan NULL */
 
-------------;
+void dealokasiSesi(adrNodeSesi &P);
 /* I.S. pointer P terdefinisi
    F.S. memori yang digunakan P dikembalikan ke sistem */
 
 // pencarian sebuah elemen node
-------------;
-/* I.S. BST T dan identitas mahasiswa, mata kuliah, serta periode terdefinisi
-   F.S. mengembalikan alamat node yang cocok atau NULL jika tidak ditemukan
-*/
+adrNodeSesi findNodeSesi(BSTSesi T, string idSesi);
+/* I.S. BST T dan idSesi terdefinisi
+   F.S. mengembalikan alamat node dengan idSesi yang cocok atau NULL jika tidak ditemukan */
 
-// penambahan elemen *
-------------;
+// penambahan elemen
+void insertNodeSesi(BSTSesi &T, adrNodeSesi P);
 /* I.S. terdefinisi BST T yang mungkin kosong dan elemen node P
-   F.S. menempatkan elemen beralamat P menurut T < E < D < C < BC < B < AB < A,
-        lalu NIM, kode MK, semester, dan tahun akademik sebagai tie-breaker */
+   F.S. menempatkan elemen beralamat P pada BST terurut berdasarkan idSesi */
 
-// penghapusan node yang sudah diketahui alamatnya
-------------;
+// penghapusan node
+void deleteNodeSesi(BSTSesi &T, adrNodeSesi &P);
 /* I.S. terdefinisi BST T yang mungkin kosong dan elemen node P
-   F.S. P adalah alamat dari alamat elemen yang akan dihapus.
-        elemen lain menggantikan posisi elemen P yang dihapus
-        sesuai aturan BST*/
+   F.S. P adalah alamat dari alamat elemen yang akan dihapus;
+        elemen lain menggantikan posisi elemen P yang dihapus sesuai aturan BST */
 
-------------;
-/* I.S. terdefinisi BST T dan identitas record nilai
-   F.S. record yang cocok dihapus jika ditemukan */
+void deleteByIdSesi(BSTSesi &T, string idSesi);
+/* I.S. terdefinisi BST T dan idSesi terdefinisi
+   F.S. node dengan idSesi yang cocok dihapus jika ditemukan */
 
-------------;
+// traversal
+void printInOrderSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
-   F.S. seluruh record ditampilkan dengan traversal in-order */
+   F.S. seluruh record sesi ditampilkan dengan traversal in-order */
 
-------------;
+void printPreOrderSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
-   F.S. seluruh record ditampilkan dengan traversal pre-order */
+   F.S. seluruh record sesi ditampilkan dengan traversal pre-order */
 
-------------;
+void printPostOrderSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
-   F.S. seluruh record ditampilkan dengan traversal post-order */
+   F.S. seluruh record sesi ditampilkan dengan traversal post-order */
 
-------------;
+// informasi pohon
+adrNodeSesi minNodeSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
-   F.S. mengembalikan node dengan grade minimum atau NULL jika BST kosong */
+   F.S. mengembalikan node dengan idSesi minimum atau NULL jika BST kosong */
 
-------------;
+adrNodeSesi maxNodeSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
-   F.S. mengembalikan node dengan grade maksimum atau NULL jika BST kosong */
+   F.S. mengembalikan node dengan idSesi maksimum atau NULL jika BST kosong */
 
-------------;
+int heightBSTSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
    F.S. mengembalikan tinggi BST; tinggi pohon kosong adalah 0 */
 
-------------;
+int countNodeSesi(BSTSesi T);
 /* I.S. terdefinisi BST T
    F.S. mengembalikan jumlah node dalam BST */
 
-------------;
+// input dari user
+infotypeSesi inputSesiStreaming();
 /* I.S. ~
-   F.S. meminta data nilai akademik dari user */
+   F.S. meminta data sesi streaming dari user */
 
-
-#endif // NILAIBST_H_INCLUDED
+#endif // SESISTREAMINGBST_H_INCLUDED
