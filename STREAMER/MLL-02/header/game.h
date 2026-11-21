@@ -5,6 +5,8 @@
 #include <string>
 using namespace std;
 
+/* ananda */
+
 struct Game {
     string idGame;
     string judulGame;
