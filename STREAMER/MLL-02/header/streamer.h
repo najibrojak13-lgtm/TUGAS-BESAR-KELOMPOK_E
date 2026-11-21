@@ -1,99 +1,45 @@
-#ifndef STREAMER_H_INCLUDED
-#define STREAMER_H_INCLUDED
-#include "aktivitas.h"
-#include <string>
-#include <iostream>
+#ifndef STREAMER_H
+#define STREAMER_H
 
+#include <iostream>
+#include <string>
 using namespace std;
 
-struct ------------
-{
-    ------------
+struct Streamer {
+    string idStreamer;
+    string namaStreamer;
+    string platform;
+    int jumlahFollower;
 };
 
-typedef ------------ ------------;         // variabel alias untuk infor
-typedef  struct ------------ *------------;   // variabel alias untuk pointer
+typedef Streamer infotypeStreamer;
+typedef struct ElmStreamer* adrStreamer;
 
-// kerangka dari elemen list
-struct ------------
-{
-    ------------
+struct ElmStreamer {
+    infotypeStreamer info;
+    adrStreamer next;
+    adrStreamer prev;
 };
 
-// kerangka dari list
-struct ------------
-{
-    ------------
+struct ListStreamer {
+    adrStreamer first;
+    adrStreamer last;
 };
 
-// pengecekan apakah list kosong
-------------;
-/* I.S. list LM terdefinisi
-   F.S. true jika list kosong dan false jika tidak kosong */
+void createListStreamer(ListStreamer &L);
+bool isEmptyStreamer(ListStreamer L);
+adrStreamer alokasiStreamer(infotypeStreamer x);
+void dealokasiStreamer(adrStreamer &p);
 
-------------;
-/* I.S. ~
-   F.S. terbentuk list kosong */
+void insertFirstStreamer(ListStreamer &L, adrStreamer p);
+void insertLastStreamer(ListStreamer &L, adrStreamer p);
+void insertAfterStreamer(ListStreamer &L, adrStreamer prec, adrStreamer p);
 
-// manajemen memori
-------------;
-/* I.S. info mahasiswa x terdefinisi
-   F.S. mengembalikan alamat elemen berisi x dengan prev/next NULL
-        dan daftar KRS dalam keadaan kosong */
+void deleteFirstStreamer(ListStreamer &L, adrStreamer &p);
+void deleteLastStreamer(ListStreamer &L, adrStreamer &p);
+void deleteStreamerByID(ListStreamer &L, string idStreamer, adrStreamer &p);
 
-------------;
-/* I.S. pointer P terdefinisi
-   F.S. elemen mahasiswa dan seluruh elemen KRS relasinya di-dealokasi;
-        elemen mata kuliah yang dirujuk tidak ikut dihapus */
+adrStreamer findStreamer(ListStreamer L, string idStreamer);
+void printAllStreamer(ListStreamer L);
 
-// pencarian sebuah elemen list
-------------;
-/* I.S. list LM dan NIM terdefinisi
-   F.S. mengembalikan alamat elemen mahasiswa yang cocok atau NULL jika tidak ditemukan
-*/
-
-// penambahan elemen *
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong dan elemen list P
-   F.S. menempatkan elemen beralamat P pada awal list */
-
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong, elemen list P dan elemn list prec
-   F.S. menempatkan elemen beralamat P sesudah elemen beralamat Prec */
-
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong dan elemen list P
-   F.S. menempatkan elemen beralamat P pada akhir list */
-
-// penghapusan sebuah elemen
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong dan elemen list P
-   F.S. P adalah alamat dari alamat elemen pertama list
-        yang akan dihapus dan elemen list selanjutnya akan menjadi
-        elemenlist pertama atau tidak ada elemen list pertama*/
-
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong dan elemen list P
-   F.S. P adalah alamat dari alamat elemen terakhir list
-        yang akan dihapus dan elemen list sebelumnya akan menjadi
-        elemenlist terakhir atau tidak ada elemen list terakhir */
-
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong, elemen list P dan elemn list prec
-   F.S. P adalah alamat dari alamat elemen list setelah prec
-        yang akan dihapus dan elemen list setelah p akan terhubung
-        langsung dengan prec atau tidak ada elemen list setelahnya */
-
-------------;
-/* I.S. terdefinisi list LM yang mungkin kosong
-   F.S. jika list tidak kosong menampilkan semua info yang ada pada list */
-
-------------;
-/* I.S. terdefinisi list mahasiswa dan alamat mata kuliah
-        F.S. true jika mata kuliah masih direferensikan oleh KRS mahasiswa */
-
-------------;
-/* I.S. ~
-   F.S. meminta data mahasisswa dari user */
-
-#endif // MAHASISWA_H_INCLUDED
+#endif

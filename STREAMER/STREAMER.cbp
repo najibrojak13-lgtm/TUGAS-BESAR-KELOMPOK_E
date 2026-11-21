@@ -32,7 +32,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="BST/header/nilaiBST.h" />
+		<Unit filename="BST/header/sesi_streaming.h" />
+		<Unit filename="BST/implementation/sesi_streaming_103012500358.cpp" />
+		<Unit filename="BST/implementation/sesi_streaming_103012530069.cpp" />
 		<Unit filename="Bonus/header/bonus.h" />
 		<Unit filename="Bonus/implementation/bonus.cpp" />
 		<Unit filename="Khusus/header/khusus.h" />
