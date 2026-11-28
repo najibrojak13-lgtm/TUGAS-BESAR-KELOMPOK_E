@@ -1,114 +1,141 @@
 #include "dummy.h"
+#include <iostream>
+using namespace std;
 
-namespace
-{
-    void appendKRS(ListMahasiswa &LM, ListMatakuliah &LMK, const string &nim, const string &kodeMK, const string &id, int semester, int tahunAkademik, const string &kelas)
-    /* I.S. mahasiswa dengan NIM dan mata kuliah dengan kode MK tersedia
-       F.S. elemen KRS baru ditambahkan ke daftar KRS mahasiswa dan terhubung ke mata kuliah */
-    {
-        addressM parent = findElm(LM, nim);
-        addressMK child = findElm(LMK, kodeMK);
-        infotypeK info = {id, kelas, "Aktif", semester, tahunAkademik};
-        addressK node = createElemen(info, child);
-        insertLast(parent->LK, node);
+void runDummyStreamer(ListStreamer &LS) {
+    cout << "=== DUMMY STREAMER (MLL PARENT) ===" << endl;
+    createListStreamer(LS);
+
+    infotypeStreamer s1 = {"STR-01", "RakaGaming", "YouTube", 125000};
+    infotypeStreamer s2 = {"STR-02", "NadiaPlay", "Twitch", 84000};
+    infotypeStreamer s3 = {"STR-03", "DimasLive", "TikTok", 53000};
+
+    insertFirstStreamer(LS, alokasiStreamer(s1));
+    insertLastStreamer(LS, alokasiStreamer(s2));
+
+    adrStreamer prec = findStreamer(LS, "STR-01");
+    insertAfterStreamer(LS, prec, alokasiStreamer(s3));
+
+    printAllStreamer(LS);
+
+    adrStreamer cari = findStreamer(LS, "STR-02");
+    if (cari != NULL) {
+        cout << "Ditemukan streamer: " << cari->info.namaStreamer << endl;
     }
 
-    NilaiAkademik makeNilai(int id, const string &nim, const string &kodeMK, int tugas, int kuis, int uts, int uas)
-    /* I.S. identitas nilai dan seluruh komponen nilai terdefinisi
-       F.S. mengembalikan data nilai akademik dengan nilai akhir dan grade hasil perhitungan */
-    {
-        NilaiAkademik info;
-        info.idNilai = id;
-        info.nim = nim;
-        info.kodeMK = kodeMK;
-        info.semester = 7;
-        info.tahunAkademik = 2026;
-        info.nilaiTugas = tugas;
-        info.nilaiKuis = kuis;
-        info.nilaiUTS = uts;
-        info.nilaiUAS = uas;
-        hitungNilaiAkhir(info);
-        return info;
+    adrStreamer dihapus = NULL;
+    deleteStreamerByID(LS, "STR-03", dihapus);
+    if (dihapus != NULL) {
+        dealokasiStreamer(dihapus);
     }
+
+    cout << "Setelah hapus STR-03:" << endl;
+    printAllStreamer(LS);
+    cout << endl;
 }
 
-void dummyMahasiswa(ListMahasiswa &LM)
-/* I.S. LM terdefinisi dan kosong
-   F.S. LM berisi 5 mahasiswa dengan relasi DLL */
-{
-    const infotypeM data[] = {
-        {"Andi Saputra", "231001", "Informatika", 2023},
-        {"Budi Santoso", "231002", "Informatika", 2023},
-        {"Citra Lestari", "231003", "Sistem Informasi", 2023},
-        {"Dinda Putri", "231004", "Informatika", 2023},
-        {"Eko Pratama", "231005", "Sistem Informasi", 2023}
-    };
+void runDummyGame(ListGame &LG) {
+    cout << "=== DUMMY GAME (MLL CHILD) ===" << endl;
+    createListGame(LG);
 
-    for (unsigned int i = 0; i < sizeof(data) / sizeof(data[0]); ++i) {
-        addressM node = createElemen(data[i]);
-        insertLast(LM, node);
+    infotypeGame g1 = {"GM-01", "Valorant", "FPS", 8.7f};
+    infotypeGame g2 = {"GM-02", "Mobile Legends", "MOBA", 8.2f};
+    infotypeGame g3 = {"GM-03", "Elden Ring", "RPG", 9.5f};
+
+    insertFirstGame(LG, alokasiGame(g1));
+    insertLastGame(LG, alokasiGame(g2));
+    insertLastGame(LG, alokasiGame(g3));
+
+    printAllGame(LG);
+
+    adrGame cari = findGame(LG, "GM-03");
+    if (cari != NULL) {
+        cout << "Ditemukan game: " << cari->info.judulGame << endl;
     }
+
+    adrGame dihapus = NULL;
+    deleteGameByID(LG, "GM-02", dihapus);
+    if (dihapus != NULL) {
+        dealokasiGame(dihapus);
+    }
+
+    cout << "Setelah hapus GM-02:" << endl;
+    printAllGame(LG);
+    cout << endl;
 }
 
-void dummyMatakuliah(ListMatakuliah &LMK)
-/* I.S. LMK terdefinisi dan kosong
-   F.S. LMK berisi 5 mata kuliah dalam SLL */
-{
-    const infotypeMK data[] = {
-        {"Algoritma dan Pemrograman", "IF101", 3, 1},
-        {"Struktur Data", "IF102", 3, 2},
-        {"Basis Data", "IF103", 3, 3},
-        {"Pemrograman Berorientasi Objek", "IF104", 3, 3},
-        {"Jaringan Komputer", "IF105", 3, 4}
-    };
+void runDummyAktivitas(ListAktivitas &LA) {
+    cout << "=== DUMMY AKTIVITAS (MLL) ===" << endl;
+    createListAktivitas(LA);
 
-    for (unsigned int i = 0; i < sizeof(data) / sizeof(data[0]); ++i) {
-        addressMK node = createElemen(data[i]);
-        insertLast(LMK, node);
+    infotypeAktivitas a1 = {"2026-11-20", "Selesai", "Tinggi"};
+    infotypeAktivitas a2 = {"2026-11-22", "Berlangsung", "Sedang"};
+    infotypeAktivitas a3 = {"2026-11-25", "Terjadwal", "Rendah"};
+
+    insertFirstAktivitas(LA, alokasiAktivitas(a1));
+    insertLastAktivitas(LA, alokasiAktivitas(a2));
+
+    adrAktivitas prec = findElmAktivitas(LA, "2026-11-20");
+    insertAfterAktivitas(LA, prec, alokasiAktivitas(a3));
+
+    printInfoAktivitas(LA);
+
+    adrAktivitas dihapus = NULL;
+    deleteFirstAktivitas(LA, dihapus);
+    if (dihapus != NULL) {
+        dealokasiAktivitas(dihapus);
     }
+
+    cout << "Setelah hapus elemen pertama aktivitas:" << endl;
+    printInfoAktivitas(LA);
+    cout << endl;
 }
 
-void dummyKRS(ListMahasiswa &LM, ListMatakuliah &LMK)
-/* I.S. LM berisi 5 mahasiswa dan LMK berisi 5 mata kuliah
-   F.S. KRS mahasiswa terhubung ke mata kuliah; total 10 relasi */
-{
-    addressM parent = LM.first;
-    while (parent != NULL) {
-        CreateList(parent->LK);
-        parent = parent->next;
-    }
+void runDummySesiBST(BSTSesi &TBS) {
+    cout << "=== DUMMY SESI STREAMING (BST) ===" << endl;
+    createBSTSesi(TBS);
 
-    appendKRS(LM, LMK, "231001", "IF101", "KRS001", 7, 2026, "A");
-    appendKRS(LM, LMK, "231001", "IF103", "KRS002", 7, 2026, "A");
-    appendKRS(LM, LMK, "231002", "IF102", "KRS003", 7, 2026, "B");
-    appendKRS(LM, LMK, "231002", "IF103", "KRS004", 7, 2026, "B");
-    appendKRS(LM, LMK, "231003", "IF101", "KRS005", 7, 2026, "A");
-    appendKRS(LM, LMK, "231003", "IF104", "KRS006", 7, 2026, "A");
-    appendKRS(LM, LMK, "231004", "IF105", "KRS007", 7, 2026, "C");
-    appendKRS(LM, LMK, "231005", "IF102", "KRS008", 7, 2026, "B");
-    appendKRS(LM, LMK, "231004", "IF101", "KRS009", 7, 2026, "C");
-    appendKRS(LM, LMK, "231005", "IF103", "KRS010", 7, 2026, "B");
+    infotypeSesi d1 = {"SES-050", "STR-01", "GM-01", "2026-11-20", 180, 4200, 15000, 1250000.0};
+    infotypeSesi d2 = {"SES-020", "STR-01", "GM-03", "2026-11-21", 240, 6100, 22000, 2100000.0};
+    infotypeSesi d3 = {"SES-080", "STR-02", "GM-01", "2026-11-22", 150, 3100, 11000, 950000.0};
+    infotypeSesi d4 = {"SES-010", "STR-03", "GM-02", "2026-11-23", 120, 1900, 7500, 600000.0};
+
+    insertNodeSesi(TBS, alokasiSesi(d1));
+    insertNodeSesi(TBS, alokasiSesi(d2));
+    insertNodeSesi(TBS, alokasiSesi(d3));
+    insertNodeSesi(TBS, alokasiSesi(d4));
+
+    cout << "In-Order:" << endl;
+    printInOrderSesi(TBS);
+
+    cout << "Pre-Order: ";
+    printPreOrderSesi(TBS);
+
+    cout << "Post-Order: ";
+    printPostOrderSesi(TBS);
+
+    cout << "Jumlah node: " << countNodeSesi(TBS)
+         << " | Tinggi BST: " << heightBSTSesi(TBS) << endl;
+
+    adrNodeSesi minN = minNodeSesi(TBS);
+    adrNodeSesi maxN = maxNodeSesi(TBS);
+    if (minN != NULL) cout << "Min ID Sesi: " << minN->info.idSesi << endl;
+    if (maxN != NULL) cout << "Max ID Sesi: " << maxN->info.idSesi << endl;
+
+    deleteByIdSesi(TBS, "SES-020");
+    cout << "In-Order setelah hapus SES-020:" << endl;
+    printInOrderSesi(TBS);
+    cout << endl;
 }
 
-void dummyNilai(BST &T)
-/* I.S. T terdefinisi dan kosong
-   F.S. T berisi 10 data nilai akademik */
-{
-    const NilaiAkademik data[] = {
-        makeNilai(50, "231001", "IF101", 85, 80, 82, 88),
-        makeNilai(30, "231001", "IF103", 80, 75, 78, 82),
-        makeNilai(70, "231002", "IF102", 90, 85, 88, 92),
-        makeNilai(20, "231002", "IF103", 75, 78, 72, 80),
-        makeNilai(40, "231003", "IF101", 88, 90, 85, 87),
-        makeNilai(60, "231003", "IF104", 82, 80, 84, 86),
-        makeNilai(80, "231004", "IF105", 70, 75, 72, 78),
-        makeNilai(35, "231005", "IF102", 85, 82, 80, 84),
-        makeNilai(85, "231004", "IF101", 90, 88, 92, 94),
-        makeNilai(90, "231005", "IF103", 68, 70, 72, 74)
-    };
+void runAllDummy() {
+    ListStreamer LS;
+    ListGame LG;
+    ListAktivitas LA;
+    BSTSesi TBS;
 
-    for (unsigned int i = 0; i < sizeof(data) / sizeof(data[0]); ++i) {
-        addressN node = createElemen(data[i]);
-        insertNode(T, node);
-    }
+    runDummyStreamer(LS);
+    runDummyGame(LG);
+    runDummyAktivitas(LA);
+    runDummySesiBST(TBS);
 }
